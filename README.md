@@ -1,4 +1,5 @@
 # Olá! Eu sou João Pedro Medeiros Machado 👋
+
 🎓 Estudante de Informática
 
 💻 Apaixonado por tecnologia e desenvolvimento
@@ -18,17 +19,18 @@ Python
 Git & GitHub
 
 4. Projetos
-Zé Fominha: Projeto focado em solução/sistema para área de alimentação/pedidos.
+Zé Fominha: Aplicativos de Delivary
 (Novos projetos serão adicionados futuramente!)
 
 5. Contato
 E-mail: joaopedromedeirosmachado244@gmail.com
 
-GitHub: (Adicione o link do seu perfil aqui)
+GitHub: (https://github.com/Joaoestrela400)
 
 6. Linguagens Mais Utilizadas
 HTML/CSS | JavaScript | Python
-7. Objetivos para 2026
+
+8. Objetivos para 2026
 🎯 Passar em um concurso público
 
 🥊 Vencer o campeonato de boxe
