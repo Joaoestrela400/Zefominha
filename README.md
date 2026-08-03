@@ -1,16 +1,45 @@
-## Hi there 👋
+#Olá! Eu sou João Pedro Medeiros Machado 👋
+🎓 Estudante de Informática
 
-<!--
-**Joaoestrela400/Joaoestrela400** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+💻 Apaixonado por tecnologia e desenvolvimento
 
-Here are some ideas to get you started:
+🚀 Em busca constante de evolução pessoal e profissional
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+2. Sobre Mim
+Natural e morador de Formoso do Araguaia, sou estudante do curso de Informática. Tenho grande interesse na área de tecnologia, focado em aprimorar minhas habilidades práticas e teóricas. Meus principais objetivos profissionais incluem alcançar a estabilidade e o sucesso através de um concurso público, além de me dedicar continuamente ao aprendizado na área tech.
+
+3. Tecnologias
+HTML & CSS
+
+JavaScript
+
+Python
+
+Git & GitHub
+
+4. Projetos
+Zé Fominha: Projeto focado em solução/sistema para área de alimentação/pedidos.
+(Novos projetos serão adicionados futuramente!)
+
+5. Contato
+E-mail: joaopedromedeirosmachado244@gmail.com
+
+GitHub: (Adicione o link do seu perfil aqui)
+
+6. Linguagens Mais Utilizadas
+HTML/CSS | JavaScript | Python
+7. Objetivos para 2026
+🎯 Passar em um concurso público
+
+🥊 Vencer o campeonato de boxe
+
+💻 Aprofundar os conhecimentos em desenvolvimento de software
+
+🚀 Finalizar e publicar novos projetos no portfólio
+
+8. Curiosidades
+🥊 Pratico boxe e focado em alta performance nas lutas.
+
+💍 Em um relacionamento comprometido com a Renielly.
+
+📚 Sempre buscando conciliar estudos de tecnologia, preparação para concursos e treinos.
