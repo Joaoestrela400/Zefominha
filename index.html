@@ -1,4 +1,7 @@
+
 <!DOCTYPE html>
+<!-- Deus é fiel. -->
+
 <html lang="pt-BR">
 
 <head>
@@ -7,86 +10,93 @@
 
     <title>Zé Fominha</title>
 
-    <!-- Link do arquivo CSS -->
     <link rel="stylesheet" href="style.css">
 
-    <!-- Fonte Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
 </head>
 
 <body>
 
-    <!-- HEADER -->
     <header class="header">
 
         <div class="header-container">
 
-            <!-- LOGO -->
-            <a href="#" class="logo">
+            <a href="./index.html" class="logo">
 
-                <!-- Imagem da logo -->
-                <img 
-                    src="assets/51 Sem Título_20260903102834.png" 
-                    alt="Logo do Zé Fominha"
+                <img
+                    src="./assets/51 Sem Título_20260903102834.png"
+                    alt="Logo Zé Fominha"
+                    width="60"
                 >
 
-                <!-- Texto da logo -->
-                <div class="logo-text">
-
-                    <!-- Nome principal -->
-                    <span class="logo-title">
-                        Zé Fominha
-                    </span>
-
-                    <!-- Subtítulo -->
-                    <span class="logo-subtitle">
-                        Com fome? Com Zé Fominha ela some.
-                    </span>
-
-                </div>
+                <span class="logo-text">
+                    <span class="logo-tittle">Zé Fominha</span>
+                    <span class="Logo-subtitle">O melhor delivery</span>
+                </span>
 
             </a>
 
-
-            <!-- MENU DE NAVEGAÇÃO -->
             <nav class="main-nav">
 
-                <!-- Link para entregadores -->
-                <a href="entregador.html" class="nav-link">
-                    Entregador
-                </a>
+                <a href="./index.html" class="nav-link active">Início</a>
 
-                <!-- Link para restaurantes e mercados -->
-                <a href="Restaurante-e-mercado.html" class="nav-link">
-                    Restaurante e Mercado
-                </a>
+                <a href="./cardapio.html" class="nav-link">Cardápio</a>
 
-                <!-- Link para carreiras -->
-                <a href="Carreiras.html" class="nav-link">
-                    Carreiras
-                </a>
+                <a href="./Sobre.html" class="nav-link">Sobre</a>
 
-                <!-- Link para benefícios -->
-                <a href="Ze-fominha-benefícios.html" class="nav-link">
-                    Zé Fominha Benefícios
-                </a>
+                <a href="./Carrinho.html" class="nav-link">Carrinho</a>
 
             </nav>
 
-
-            <!-- AÇÕES DO HEADER -->
             <div class="header-actions">
 
-                <!-- Botão Criar conta -->
-                <button class="btn-primary">
-                    Criar conta
+                <div class="search-box">
+
+                    <input
+                        type="text"
+                        placeholder="Buscar"
+                        aria-label="Buscar"
+                    >
+
+                    <img
+                        class="search-icon"
+                        src="./Assets/icons8-pesquisar.svg"
+                        alt=""
+                        width="20"
+                    >
+
+                </div>
+
+                <button type="button" class="btn-primary">
+                    Cadastrar conta
                 </button>
 
-                <!-- Botão Entrar -->
-                <button class="btn-primary">
-                    Entrar
+                <!-- Botão do menu responsivo -->
+                <button
+                    type="button"
+                    class="hamburguer"
+                    id="btn-menu"
+                    aria-label="Abrir menu"
+                    aria-expanded="false"
+                    aria-controls="menu-principal"
+                >
+                    ☰ Menu
+                </button>
+
+                <!-- Botão de alternância do tema -->
+                <button
+                    type="button"
+                    class="btn-tema"
+                    id="btn-tema"
+                    aria-label="Ativar modo escuro"
+                >
+                    🌙
                 </button>
 
             </div>
@@ -95,6 +105,7 @@
 
     </header>
 
-</body>
+    <script src="js/script.js"></script>
 
+</body>
 </html>

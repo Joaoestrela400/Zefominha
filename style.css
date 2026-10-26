@@ -1,123 +1,130 @@
+
+/* Variáveis globais */
 :root {
-    --color-primary: red; /* Cor principal */
-    --color-primary-dark: darkred; /* Versão escura */
-    --color-text: orange; /* Cor do texto principal */
-    --color-text-light: gray; /* Cor do texto secundário */
-    --color-border: black; /* Cor da borda */
-    --color-bg: #FFF; /* Cor de fundo */
-    --font-main: 'Inter', sans-serif; /* Fonte */
+    --color-primary: #ff1a1a;
+    --color-primary-dark: #ca3945;
+    --color-text: #000000;
+    --color-text-light: #4e4e4e;
+    --color-border: #E5E7EB;
+    --color-bg: #ffffff;
+    --font-main: 'Inter', sans-serif;
 }
 
-/* Reset básico: remove espaçamentos padrão do navegador */
+/* Reset */
 * {
-    margin: 0; /* Espaçamento externo */
-    padding: 0; /* Espaçamento interno */
-    box-sizing: border-box; /* Padding e border não aumentam o tamanho do elemento */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-    font-family: var(--font-main); /* Tipo da fonte */
-    background-color: var(--color-bg); /* Cor de fundo */
+    font-family: var(--font-main);
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* HEADER */
+/* Cabeçalho */
 .header {
     width: 100%;
-    background-color: var(--color-primary-dark);
-    border-bottom: 1px solid var(--color-border); /* Borda inferior */
-    position: sticky; /* Header "gruda" no topo ao rolar a página */
+    background-color: var(--color-bg);
+    border-bottom: 1px solid var(--color-border);
+    position: sticky;
     top: 0;
-    z-index: 100; /* Garante que fique acima dos outros elementos */
+    z-index: 100;
+    transition: background-color 0.3s ease;
 }
 
 .header-container {
-    max-width: 1200px; /* Largura máxima do conteúdo */
-    margin: 0 auto; /* Centraliza na página */
+    max-width: 1200px;
+    margin: 0 auto;
     padding: 16px 24px;
-    display: flex; /* Organiza os elementos lado a lado */
-    align-items: center; /* Centraliza verticalmente */
-    justify-content: space-between; /* Distribui os elementos */
-    gap: 24px; /* Espaço entre os elementos */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
 }
 
-/* LOGO */
-
+/* Logo */
 .logo {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 8px;
     text-decoration: none;
+    flex-shrink: 0;
 }
 
 .logo img {
-    width: 100px;
-    object-fit: contain; /* Mantém a proporção da imagem */
+    width: 60px;
+    height: auto;
+    display: block;
+    flex-shrink: 0;
 }
 
 .logo-text {
     display: flex;
-    flex-direction: column; /* Título em cima, subtítulo embaixo */
+    flex-direction: column;
 }
 
-.logo-title {
+.logo-tittle {
     font-size: 16px;
-    font-weight: 700; /* Negrito */
-    color: var(--color-primary);
-}
-
-.logo-subtitle {
-    font-size: 12px;
-    font-weight: 400;
+    font-weight: 600;
     color: var(--color-text);
 }
 
-/* Navegação (Menu) */
+.Logo-subtitle {
+    font-size: 12px;
+    color: var(--color-text-light);
+}
 
+/* Navegação */
 .main-nav {
     display: flex;
-    align-items: center; /* Centraliza os links verticalmente */
-    gap: 32px; /* Espaço entre os links */
+    align-items: center;
+    gap: 32px;
 }
 
 .nav-link {
-    text-decoration: none; /* Remove a estilização padrão dos links */
+    text-decoration: none;
     font-size: 14px;
     font-weight: 500;
-    color: var(--color-text);
-    transition: color 0.2s ease; /* Muda a cor suavemente */
+    color: var(--color-text-light);
+    transition: color 0.2s ease;
 }
 
 .nav-link:hover {
-    color: var(--color-text); /* Muda de cor ao passar o mouse */
+    color: var(--color-text);
 }
 
 .nav-link.active {
-    color: var(--color-primary); /* Destaca o link da página atual */
+    color: var(--color-primary);
     font-weight: 600;
 }
 
-/* AÇÕES HEADER (busca + botão) */
-
+/* Ações do cabeçalho */
 .header-actions {
     display: flex;
     align-items: center;
     gap: 16px;
 }
 
+/* Pesquisa */
 .search-box {
-    position: relative; /* Serve para posicionar o ícone da lupa */
+    position: relative;
     display: flex;
     align-items: center;
 }
 
 .search-box input {
     font-family: var(--font-main);
+    padding: 10px 40px 10px 16px;
     width: 220px;
-    padding: 10px 40px 10px 16px; /* Espaço para o ícone de pesquisa */
     border: 1px solid var(--color-border);
     border-radius: 8px;
     font-size: 14px;
-    outline: none; /* Remove a borda padrão do navegador */
+    outline: none;
+    background-color: var(--color-bg);
+    color: var(--color-text);
 }
 
 .search-box input:focus {
@@ -129,28 +136,141 @@ body {
 }
 
 .search-icon {
-    position: absolute; /* Posiciona o ícone sobre o input */
+    position: absolute;
     right: 14px;
-    width: 25px;
-    color: var(--color-text-light); /* Cor do ícone SVG */
-    pointer-events: none; /* Não interfere no clique no input */
+    pointer-events: none;
+    width: 20px;
+    height: auto;
 }
 
+/* Botão principal */
 .btn-primary {
     font-family: var(--font-main);
     background-color: var(--color-primary);
-    color: #FFF;
+    color: #ffffff;
     border: none;
     padding: 10px 20px;
     border-radius: 8px;
     font-size: 14px;
     font-weight: 600;
-    cursor: pointer; /* Mostra que é clicável */
-    white-space: nowrap; /* Impede que o texto quebre linha */
-    display: flex;
+    cursor: pointer;
+    white-space: nowrap;
     transition: background-color 0.2s ease;
 }
 
 .btn-primary:hover {
     background-color: var(--color-primary-dark);
+}
+
+/* Botão hambúrguer */
+.hamburguer {
+    display: none;
+    font-family: var(--font-main);
+    font-size: 14px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--color-text);
+    white-space: nowrap;
+}
+
+/* Botão de tema */
+.btn-tema {
+    font-size: 20px;
+    background: none;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: 8px 10px;
+    cursor: pointer;
+}
+
+/* Modo escuro */
+body.escuro {
+    --color-text: #f5f5f5;
+    --color-text-light: #bdbdbd;
+    --color-border: #3a3a3a;
+    --color-bg: #181818;
+}
+
+body.escuro .header {
+    background-color: var(--color-bg);
+}
+
+body.escuro .btn-tema {
+    color: var(--color-text);
+    border-color: var(--color-border);
+}
+
+/* Títulos */
+h1 {
+    font-size: 30px;
+    font-weight: 700;
+    margin: 20px 0;
+    color: var(--color-text);
+    text-align: center;
+}
+
+/* Imagem do cardápio */
+.imagem-cardapio {
+    width: 500px;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 20px auto;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+
+    .header-container {
+        gap: 12px;
+        padding: 16px;
+        flex-wrap: wrap;
+    }
+
+    .logo {
+        margin-right: auto;
+    }
+
+    .logo img {
+        width: 50px;
+    }
+
+    .search-box {
+        display: none;
+    }
+
+    .main-nav {
+        display: none;
+        flex-direction: column;
+        align-items: flex-start;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: var(--color-bg);
+        border-bottom: 1px solid var(--color-border);
+        padding: 16px 24px;
+        gap: 16px;
+    }
+
+    /* Menu aberto */
+    .main-nav.active {
+        display: flex;
+    }
+
+    .btn-primary {
+        padding: 10px 12px;
+        font-size: 12px;
+    }
+
+    .hamburguer {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .btn-tema {
+        padding: 8px;
+    }
 }
