@@ -1,13 +1,36 @@
+/* =========================================================
+   ZÉ FOMINHA - style.css
+   Base: paleta vermelha, cabeçalho, modo escuro e responsivo
+   + seções novas: hero, pratos em destaque, "por que", footer
+   ========================================================= */
 
 /* Variáveis globais */
 :root {
     --color-primary: #ff1a1a;
     --color-primary-dark: #ca3945;
+    --color-primary-light: #ffecec;   /* vermelho bem clarinho (fundos de hover) */
+    --color-success: #16a34a;         /* verde */
     --color-text: #000000;
     --color-text-light: #4e4e4e;
-    --color-border: #E5E7EB;
+    --color-border: #e5e7eb;
     --color-bg: #ffffff;
+    --color-bg-soft: #fff5f5;         /* fundo suave das seções */
+    --color-card: #ffffff;            /* fundo dos cards */
+    --color-footer: #1f1f1f;          /* rodapé escuro */
+    --radius: 12px;
     --font-main: 'Inter', sans-serif;
+}
+
+/* Modo escuro: só trocamos as variáveis, o resto se adapta sozinho */
+body.escuro {
+    --color-text: #f5f5f5;
+    --color-text-light: #bdbdbd;
+    --color-border: #3a3a3a;
+    --color-bg: #181818;
+    --color-bg-soft: #202020;
+    --color-card: #242424;
+    --color-footer: #0e0e0e;
+    --color-primary-light: #3a1f1f;
 }
 
 /* Reset */
@@ -17,14 +40,33 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth; /* rolagem suave ao clicar em #por-que */
+}
+
 body {
     font-family: var(--font-main);
     background-color: var(--color-bg);
     color: var(--color-text);
+    line-height: 1.5;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Cabeçalho */
+ul {
+    list-style: none;
+}
+
+/* Centraliza o conteúdo das seções (igual ao header-container) */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+
+/* =========================================================
+   CABEÇALHO
+   ========================================================= */
 .header {
     width: 100%;
     background-color: var(--color-bg);
@@ -66,12 +108,15 @@ body {
     flex-direction: column;
 }
 
+/* Aceita as duas grafias (a certa e a antiga com erro de digitação) */
+.logo-title,
 .logo-tittle {
     font-size: 16px;
     font-weight: 600;
     color: var(--color-text);
 }
 
+.logo-subtitle,
 .Logo-subtitle {
     font-size: 12px;
     color: var(--color-text-light);
@@ -162,7 +207,7 @@ body {
     background-color: var(--color-primary-dark);
 }
 
-/* Botão hambúrguer */
+/* Botão hambúrguer (escondido no desktop) */
 .hamburguer {
     display: none;
     font-family: var(--font-main);
@@ -182,35 +227,10 @@ body {
     border-radius: 8px;
     padding: 8px 10px;
     cursor: pointer;
-}
-
-/* Modo escuro */
-body.escuro {
-    --color-text: #f5f5f5;
-    --color-text-light: #bdbdbd;
-    --color-border: #3a3a3a;
-    --color-bg: #181818;
-}
-
-body.escuro .header {
-    background-color: var(--color-bg);
-}
-
-body.escuro .btn-tema {
     color: var(--color-text);
-    border-color: var(--color-border);
 }
 
-/* Títulos */
-h1 {
-    font-size: 30px;
-    font-weight: 700;
-    margin: 20px 0;
-    color: var(--color-text);
-    text-align: center;
-}
-
-/* Imagem do cardápio */
+/* Imagem do cardápio (página cardapio.html) */
 .imagem-cardapio {
     width: 500px;
     max-width: 100%;
@@ -219,7 +239,473 @@ h1 {
     margin: 20px auto;
 }
 
-/* Responsividade */
+
+/* =========================================================
+   TÍTULOS
+   O h1 das outras páginas é centralizado. O título do hero
+   (que também é h1) sobrescreve isso mais abaixo.
+   ========================================================= */
+h1 {
+    font-size: 30px;
+    font-weight: 700;
+    margin: 20px 0;
+    color: var(--color-text);
+    text-align: center;
+}
+
+.section-title {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   ÍCONES (Material Symbols)
+   O ícone é uma FONTE: tamanho com font-size, cor com color.
+   ========================================================= */
+.material-symbols-outlined {
+    font-size: 24px;
+    line-height: 1;
+    flex-shrink: 0;
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+/* Duas classes juntas = regra mais forte que a do Google Fonts */
+.material-symbols-outlined.icon-sm { font-size: 20px; }
+.material-symbols-outlined.icon-xs { font-size: 18px; }
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+.hero {
+    background: linear-gradient(180deg, var(--color-bg-soft) 0%, var(--color-bg) 100%);
+    padding: 64px 0;
+}
+
+.hero-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 48px;
+}
+
+.hero-content { flex: 1.2; }
+.hero-image   { flex: 1; }
+
+.hero-image img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Sobrescreve o h1 global: alinhado à esquerda e sem margem no topo */
+.hero-title {
+    font-size: 40px;
+    font-weight: 800;
+    line-height: 1.2;
+    text-align: left;
+    margin: 0 0 16px;
+}
+
+.text-highlight {
+    display: block;
+    color: var(--color-primary);
+}
+
+.hero-text {
+    font-size: 17px;
+    color: var(--color-text-light);
+    margin-bottom: 32px;
+    max-width: 520px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+}
+
+/* Botões do hero (classes próprias, pois no celular o
+   .btn-primary do cabeçalho é reduzido) */
+.btn-hero,
+.btn-hero-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 12px 24px;
+    border-radius: 8px;
+    border: 2px solid var(--color-primary);
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+}
+
+.btn-hero {
+    background-color: var(--color-primary);
+    color: #ffffff;
+}
+
+.btn-hero:hover {
+    background-color: var(--color-primary-dark);
+    border-color: var(--color-primary-dark);
+}
+
+.btn-hero .material-symbols-outlined {
+    transition: transform 0.2s ease;
+}
+
+.btn-hero:hover .material-symbols-outlined {
+    transform: translateX(4px);
+}
+
+.btn-hero-outline {
+    background-color: transparent;
+    color: var(--color-primary);
+}
+
+.btn-hero-outline:hover {
+    background-color: var(--color-primary-light);
+}
+
+/* Lista de vantagens */
+.hero-features {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+.hero-feature {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.hero-feature strong {
+    display: block;
+    font-size: 14px;
+}
+
+.hero-feature small {
+    font-size: 13px;
+    color: var(--color-text-light);
+}
+
+.feature-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--color-primary);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.feature-icon .material-symbols-outlined {
+    font-size: 22px;
+}
+
+.feature-icon-green {
+    background-color: var(--color-success);
+}
+
+
+/* =========================================================
+   PRATOS EM DESTAQUE (carrossel)
+   As classes ainda se chamam "course-*" para o seu
+   script.js continuar funcionando sem mudanças.
+   ========================================================= */
+.courses {
+    padding: 56px 0;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.link-arrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--color-primary);
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.link-arrow:hover {
+    text-decoration: underline;
+}
+
+.carousel {
+    position: relative;
+}
+
+.course-list {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 6px 4px 16px;
+    scrollbar-width: none;
+}
+
+.course-list::-webkit-scrollbar {
+    display: none;
+}
+
+.course-card {
+    flex: 0 0 270px;
+    scroll-snap-align: start;
+    background-color: var(--color-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease;
+}
+
+.course-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.course-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    margin-bottom: 16px;
+}
+
+.course-icon .material-symbols-outlined {
+    font-size: 28px;
+}
+
+/* Uma cor para cada prato */
+.icon-blue   { background-color: #2563eb; }
+.icon-orange { background-color: #e44d26; }
+.icon-yellow { background-color: #f7c61e; color: #1e1b2e; }
+.icon-green  { background-color: var(--color-success); }
+.icon-purple { background-color: #9333ea; }
+
+.course-title {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.course-text {
+    font-size: 14px;
+    color: var(--color-text-light);
+    margin-bottom: 20px;
+    flex-grow: 1;
+}
+
+/* Rodapé do card: preço à esquerda, tempo à direita */
+.course-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: var(--color-text-light);
+}
+
+.course-level,
+.course-lessons {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* O preço ganha destaque em verde */
+.course-level {
+    color: var(--color-success);
+    font-weight: 600;
+}
+
+/* Botões redondos de seta */
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid var(--color-border);
+    background-color: var(--color-card);
+    color: var(--color-text);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.carousel-btn:hover {
+    color: var(--color-primary);
+}
+
+.carousel-prev { left: -20px; }
+.carousel-next { right: -20px; }
+
+
+/* =========================================================
+   POR QUE PEDIR AQUI
+   ========================================================= */
+.why {
+    background-color: var(--color-bg-soft);
+    padding: 56px 0;
+}
+
+.why .section-title {
+    margin-bottom: 32px;
+}
+
+.why-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.why-item {
+    display: flex;
+    gap: 16px;
+    padding: 8px 24px;
+    border-left: 1px solid var(--color-border);
+}
+
+.why-item:first-child {
+    border-left: none;
+    padding-left: 0;
+}
+
+.material-symbols-outlined.why-icon {
+    font-size: 40px;
+    color: var(--color-primary);
+    font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 40;
+}
+
+.material-symbols-outlined.why-icon-green {
+    color: var(--color-success);
+}
+
+.why-item h3 {
+    font-size: 15px;
+    margin-bottom: 8px;
+}
+
+.why-item p {
+    font-size: 14px;
+    color: var(--color-text-light);
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+.footer {
+    background-color: var(--color-footer);
+    color: #ffffff;
+    padding-top: 48px;
+}
+
+.footer-container {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 32px;
+    padding-bottom: 40px;
+}
+
+/* No fundo escuro, o texto do logo fica claro (nos dois temas) */
+.footer .logo-title,
+.footer .logo-tittle   { color: #ffffff; }
+.footer .logo-subtitle,
+.footer .Logo-subtitle { color: #cbd5e1; }
+
+.footer-column h4 {
+    font-size: 15px;
+    margin-bottom: 16px;
+}
+
+.footer-column li {
+    margin-bottom: 8px;
+}
+
+.footer-column a {
+    color: #cbd5e1;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.footer-column a:hover {
+    color: #ffffff;
+}
+
+.social-links {
+    display: flex;
+    gap: 12px;
+}
+
+.social-links a {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease;
+}
+
+.social-links a:hover {
+    background-color: var(--color-primary);
+}
+
+.social-links i {
+    font-size: 18px;
+    color: #ffffff;
+}
+
+.footer-copy {
+    text-align: center;
+    font-size: 13px;
+    color: #cbd5e1;
+    padding: 20px 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+
+/* =========================================================
+   RESPONSIVIDADE
+   ========================================================= */
+
+/* Tablets (até 992px) */
+@media (max-width: 992px) {
+    .why-grid {
+        grid-template-columns: repeat(2, 1fr);
+        row-gap: 32px;
+    }
+
+    .why-item:nth-child(3) {
+        border-left: none;
+        padding-left: 0;
+    }
+
+    .footer-container {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* Celulares (até 768px) */
 @media (max-width: 768px) {
 
     .header-container {
@@ -254,8 +740,9 @@ h1 {
         gap: 16px;
     }
 
-    /* Menu aberto */
-    .main-nav.active {
+    /* Menu aberto (aceita .active e a antiga .ativo) */
+    .main-nav.active,
+    .main-nav.ativo {
         display: flex;
     }
 
@@ -272,5 +759,40 @@ h1 {
 
     .btn-tema {
         padding: 8px;
+    }
+
+    /* Seções novas */
+    .hero {
+        padding: 40px 0;
+    }
+
+    .hero-container {
+        flex-direction: column-reverse; /* imagem em cima, texto embaixo */
+        gap: 24px;
+    }
+
+    .hero-title {
+        font-size: 30px;
+    }
+
+    .carousel-btn {
+        display: none; /* no celular, arrasta-se com o dedo */
+    }
+
+    .course-card {
+        flex-basis: 240px;
+    }
+
+    .why-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .why-item {
+        border-left: none;
+        padding: 0;
+    }
+
+    .footer-container {
+        grid-template-columns: 1fr;
     }
 }
