@@ -1,11 +1,715 @@
 <!DOCTYPE html>
+<!-- Deus é fiel. -->
+
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carrinho</title>
+
+    <title>Carrinho | Zé Fominha</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Ícones Material Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=block" rel="stylesheet">
+
+    <!-- Font Awesome: ícones das redes sociais -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- CSS só desta página (usa as variáveis do style.css, então o modo escuro funciona sozinho) -->
+    <style>
+        .page-banner {
+            background: linear-gradient(180deg, var(--color-bg-soft) 0%, var(--color-bg) 100%);
+            padding: 48px 0 16px;
+            text-align: center;
+        }
+
+        .page-banner .page-title {
+            margin: 0 0 8px;
+            font-size: 36px;
+            font-weight: 800;
+        }
+
+        .page-banner p {
+            color: var(--color-text-light);
+            max-width: 520px;
+            margin: 0 auto;
+        }
+
+        .cart-section {
+            padding: 24px 0 64px;
+        }
+
+        .cart-layout {
+            display: grid;
+            grid-template-columns: 1.6fr 1fr;
+            gap: 24px;
+            align-items: start;
+        }
+
+        .panel {
+            background-color: var(--color-card);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius);
+            padding: 24px;
+            transition: background-color 0.3s ease;
+        }
+
+        .panel h2 {
+            font-size: 18px;
+            margin-bottom: 16px;
+        }
+
+        /* Item do carrinho */
+        .cart-item {
+            display: grid;
+            grid-template-columns: 48px 1fr auto;
+            gap: 16px;
+            align-items: center;
+            padding: 16px 0;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .cart-item:first-of-type {
+            border-top: none;
+            padding-top: 0;
+        }
+
+        .cart-item .course-icon {
+            margin-bottom: 0;
+        }
+
+        .cart-item-name {
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .cart-item-unit {
+            font-size: 13px;
+            color: var(--color-text-light);
+        }
+
+        .cart-item-side {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 8px;
+        }
+
+        .cart-item-total {
+            font-weight: 700;
+            color: var(--color-success);
+        }
+
+        /* Botões de quantidade */
+        .qty {
+            display: inline-flex;
+            align-items: center;
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .qty button {
+            width: 32px;
+            height: 32px;
+            border: none;
+            background: none;
+            color: var(--color-text);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .qty button:hover {
+            background-color: var(--color-primary-light);
+            color: var(--color-primary);
+        }
+
+        .qty span.qty-num {
+            min-width: 32px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .btn-remove {
+            font-family: var(--font-main);
+            font-size: 13px;
+            background: none;
+            border: none;
+            color: var(--color-text-light);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .btn-remove:hover {
+            color: var(--color-primary);
+        }
+
+        .btn-clear {
+            margin-top: 16px;
+        }
+
+        /* Resumo */
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            color: var(--color-text-light);
+            padding: 6px 0;
+        }
+
+        .summary-row.total {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--color-text);
+            border-top: 1px solid var(--color-border);
+            margin-top: 8px;
+            padding-top: 16px;
+        }
+
+        /* Formulário */
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-top: 16px;
+        }
+
+        .form-group label {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            font-family: var(--font-main);
+            font-size: 14px;
+            padding: 10px 12px;
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            outline: none;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 64px;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--color-primary);
+        }
+
+        .form-group .erro {
+            font-size: 13px;
+            color: var(--color-primary);
+            min-height: 0;
+        }
+
+        .btn-finish {
+            width: 100%;
+            margin-top: 24px;
+            padding: 14px 20px;
+            font-size: 15px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-finish:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn-finish:focus-visible,
+        .qty button:focus-visible,
+        .btn-remove:focus-visible {
+            outline: 3px solid var(--color-primary);
+            outline-offset: 2px;
+        }
+
+        .form-note {
+            font-size: 12px;
+            color: var(--color-text-light);
+            margin-top: 12px;
+            text-align: center;
+        }
+
+        /* Carrinho vazio / pedido enviado */
+        .state-box {
+            text-align: center;
+            padding: 56px 24px;
+        }
+
+        .state-box .material-symbols-outlined {
+            font-size: 56px;
+            color: var(--color-primary);
+            margin-bottom: 12px;
+        }
+
+        .state-box h2 {
+            font-size: 22px;
+            margin-bottom: 8px;
+        }
+
+        .state-box p {
+            color: var(--color-text-light);
+            margin-bottom: 24px;
+        }
+
+        .state-box .btn-hero {
+            display: inline-flex;
+        }
+
+        .hidden { display: none !important; }
+
+        /* Contador no link "Carrinho" do menu */
+        .cart-badge {
+            display: inline-block;
+            min-width: 20px;
+            padding: 0 6px;
+            margin-left: 6px;
+            border-radius: 999px;
+            background-color: var(--color-primary);
+            color: #ffffff;
+            font-size: 12px;
+            font-weight: 700;
+            line-height: 20px;
+            text-align: center;
+        }
+
+        .cart-badge[hidden] { display: none; }
+
+        @media (max-width: 992px) {
+            .cart-layout { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .page-banner .page-title { font-size: 28px; }
+            .panel { padding: 16px; }
+            .cart-item { grid-template-columns: 40px 1fr; }
+            .cart-item .course-icon { width: 40px; height: 40px; }
+            .cart-item-side { grid-column: 1 / -1; flex-direction: row; align-items: center; justify-content: space-between; }
+        }
+    </style>
 </head>
+
 <body>
-    <h1>Página de carrinho</h1>
+
+    <!-- ================= CABEÇALHO ================= -->
+    <header class="header">
+        <div class="header-container">
+
+            <a href="./index.html" class="logo">
+                <img src="./assets/51 Sem Título_20260903102834.png" alt="Logo Zé Fominha" width="60">
+
+                <span class="logo-text">
+                    <span class="logo-title">Zé Fominha</span>
+                    <span class="logo-subtitle">O melhor delivery</span>
+                </span>
+            </a>
+
+            <nav class="main-nav" id="menu-principal">
+                <a href="./index.html" class="nav-link">Início</a>
+                <a href="./cardapio.html" class="nav-link">Cardápio</a>
+                <a href="./Sobre.html" class="nav-link">Sobre</a>
+                <a href="./Carrinho.html" class="nav-link active">Carrinho<span class="cart-badge" hidden></span></a>
+            </nav>
+
+            <div class="header-actions">
+
+                <div class="search-box">
+                    <input type="text" placeholder="Buscar" aria-label="Buscar">
+                    <img class="search-icon" src="./Assets/icons8-pesquisar.svg" alt="" width="20">
+                </div>
+
+                <button type="button" class="btn-primary">Cadastrar conta</button>
+
+                <button type="button" class="hamburguer" id="btn-menu"
+                    aria-label="Abrir menu" aria-expanded="false" aria-controls="menu-principal">
+                    ☰ Menu
+                </button>
+
+                <button type="button" class="btn-tema" id="btn-tema" aria-label="Ativar modo escuro">
+                    🌙
+                </button>
+            </div>
+
+        </div>
+    </header>
+
+
+    <main>
+
+        <!-- ================= TÍTULO DA PÁGINA ================= -->
+        <section class="page-banner">
+            <div class="container">
+                <h1 class="page-title">Seu carrinho</h1>
+                <p>Confira os itens, ajuste as quantidades e informe o endereço de entrega.</p>
+            </div>
+        </section>
+
+
+        <section class="cart-section">
+            <div class="container">
+
+                <!-- CARRINHO VAZIO -->
+                <div class="panel state-box hidden" id="estado-vazio">
+                    <span class="material-symbols-outlined" aria-hidden="true">shopping_cart</span>
+                    <h2>Seu carrinho está vazio</h2>
+                    <p>Escolha seus pratos no cardápio e eles aparecem aqui.</p>
+                    <a href="./cardapio.html" class="btn-hero">
+                        Ver cardápio
+                        <span class="material-symbols-outlined icon-sm" aria-hidden="true">arrow_forward</span>
+                    </a>
+                </div>
+
+                <!-- PEDIDO ENVIADO -->
+                <div class="panel state-box hidden" id="estado-enviado">
+                    <span class="material-symbols-outlined" aria-hidden="true">check_circle</span>
+                    <h2>Pedido enviado!</h2>
+                    <p>Abrimos o WhatsApp com os dados do seu pedido. Basta enviar a mensagem para confirmar.</p>
+                    <a href="./cardapio.html" class="btn-hero">Fazer outro pedido</a>
+                </div>
+
+                <!-- CARRINHO COM ITENS -->
+                <div class="cart-layout hidden" id="conteudo-carrinho">
+
+                    <!-- Lista de itens -->
+                    <div class="panel">
+                        <h2>Itens do pedido</h2>
+                        <div id="lista-itens"></div>
+                        <button type="button" class="btn-remove btn-clear" id="btn-limpar">
+                            <span class="material-symbols-outlined icon-xs" aria-hidden="true">delete</span>
+                            Esvaziar carrinho
+                        </button>
+                    </div>
+
+                    <!-- Resumo + dados de entrega -->
+                    <div class="panel">
+                        <h2>Resumo</h2>
+                        <div class="summary-row"><span>Subtotal</span><span id="subtotal"></span></div>
+                        <div class="summary-row"><span>Taxa de entrega</span><span id="taxa"></span></div>
+                        <div class="summary-row total"><span>Total</span><span id="total"></span></div>
+
+                        <form id="form-pedido" novalidate>
+                            <div class="form-group">
+                                <label for="nome">Seu nome</label>
+                                <input type="text" id="nome" name="nome" autocomplete="name" required>
+                                <span class="erro" id="erro-nome"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="endereco">Endereço de entrega</label>
+                                <input type="text" id="endereco" name="endereco" autocomplete="street-address"
+                                    placeholder="Rua, número e bairro" required>
+                                <span class="erro" id="erro-endereco"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="pagamento">Forma de pagamento</label>
+                                <select id="pagamento" name="pagamento" required>
+                                    <option value="">Escolha uma opção</option>
+                                    <option value="Pix">Pix</option>
+                                    <option value="Cartão na entrega">Cartão na entrega</option>
+                                    <option value="Dinheiro">Dinheiro</option>
+                                </select>
+                                <span class="erro" id="erro-pagamento"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="obs">Observações (opcional)</label>
+                                <textarea id="obs" name="obs" placeholder="Ex.: sem cebola, troco para R$ 50"></textarea>
+                            </div>
+
+                            <button type="submit" class="btn-primary btn-finish">
+                                <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+                                Enviar pedido pelo WhatsApp
+                            </button>
+
+                            <p class="form-note">O pedido é enviado por mensagem. O pagamento é combinado na entrega.</p>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+
+    <!-- ================= RODAPÉ ================= -->
+    <footer class="footer">
+        <div class="container footer-container">
+
+            <div class="footer-brand">
+                <a href="./index.html" class="logo">
+                    <img src="./assets/51 Sem Título_20260903102834.png" alt="Logo Zé Fominha" width="60">
+                    <span class="logo-text">
+                        <span class="logo-title">Zé Fominha</span>
+                        <span class="logo-subtitle">O melhor delivery</span>
+                    </span>
+                </a>
+            </div>
+
+            <div class="footer-column">
+                <h4>Navegação</h4>
+                <ul>
+                    <li><a href="./index.html">Início</a></li>
+                    <li><a href="./cardapio.html">Cardápio</a></li>
+                    <li><a href="./Sobre.html">Sobre</a></li>
+                    <li><a href="./Carrinho.html">Carrinho</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h4>Links úteis</h4>
+                <ul>
+                    <li><a href="./index.html#por-que">Como funciona</a></li>
+                    <li><a href="#">Perguntas frequentes</a></li>
+                    <li><a href="#">Política de privacidade</a></li>
+                    <li><a href="#">Termos de uso</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h4>Redes sociais</h4>
+                <div class="social-links">
+                    <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram">
+                        <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+                    </a>
+                    <a href="https://wa.me/" target="_blank" rel="noopener" aria-label="WhatsApp">
+                        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+                    </a>
+                    <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook">
+                        <i class="fa-brands fa-facebook" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <p class="footer-copy">
+            &copy; <span id="ano"></span> Zé Fominha. Todos os direitos reservados.
+        </p>
+    </footer>
+
+    <!-- Menu, tema claro/escuro e ano do rodapé -->
+    <script src="js/script.js"></script>
+
+    <!-- =====================================================
+         JAVASCRIPT DO CARRINHO
+         Lê os itens salvos pelo cardápio (localStorage),
+         permite mudar quantidades e envia o pedido por WhatsApp.
+         ===================================================== -->
+    <script>
+        /* ---------- CONFIGURAÇÕES (mude aqui) ---------- */
+        // Número do WhatsApp da loja: código do país + DDD + número, só dígitos.
+        // Exemplo: "5563999999999". Se ficar vazio, o WhatsApp pede para escolher o contato.
+        const NUMERO_WHATSAPP = "";
+
+        // Taxa de entrega em reais
+        const TAXA_ENTREGA = 5;
+
+        const CHAVE_CARRINHO = "zefominha_carrinho";
+
+        /* Elementos da página */
+        const estadoVazio = document.getElementById("estado-vazio");
+        const estadoEnviado = document.getElementById("estado-enviado");
+        const conteudo = document.getElementById("conteudo-carrinho");
+        const listaItens = document.getElementById("lista-itens");
+        const campoSubtotal = document.getElementById("subtotal");
+        const campoTaxa = document.getElementById("taxa");
+        const campoTotal = document.getElementById("total");
+        const formPedido = document.getElementById("form-pedido");
+        const selos = document.querySelectorAll(".cart-badge");
+
+        const moeda = (valor) =>
+            valor.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+
+        const limpar = (texto) =>
+            String(texto).replace(/[&<>"']/g, (c) =>
+                ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+
+        /* ---------- LER / SALVAR ---------- */
+        function lerCarrinho() {
+            try {
+                const dados = JSON.parse(localStorage.getItem(CHAVE_CARRINHO));
+                return Array.isArray(dados) ? dados : [];
+            } catch (erro) {
+                return [];
+            }
+        }
+
+        function salvarCarrinho(itens) {
+            try {
+                localStorage.setItem(CHAVE_CARRINHO, JSON.stringify(itens));
+            } catch (erro) {
+                console.warn("Não foi possível salvar o carrinho:", erro);
+            }
+        }
+
+        function atualizarSelo(itens) {
+            const total = itens.reduce((soma, item) => soma + item.qtd, 0);
+            selos.forEach((selo) => {
+                selo.textContent = total;
+                selo.hidden = total === 0;
+            });
+        }
+
+
+        /* ---------- DESENHAR A TELA ---------- */
+        function desenhar() {
+            const itens = lerCarrinho();
+            atualizarSelo(itens);
+
+            // Sem itens: mostra a mensagem de carrinho vazio
+            if (itens.length === 0) {
+                conteudo.classList.add("hidden");
+                estadoVazio.classList.remove("hidden");
+                return;
+            }
+
+            estadoVazio.classList.add("hidden");
+            conteudo.classList.remove("hidden");
+
+            listaItens.innerHTML = itens.map((item) => `
+                <div class="cart-item">
+                    <div class="course-icon ${limpar(item.cor || "icon-orange")}">
+                        <span class="material-symbols-outlined" aria-hidden="true">${limpar(item.icone || "restaurant")}</span>
+                    </div>
+
+                    <div>
+                        <p class="cart-item-name">${limpar(item.nome)}</p>
+                        <p class="cart-item-unit">${moeda(item.preco)} cada</p>
+                    </div>
+
+                    <div class="cart-item-side">
+                        <div class="qty">
+                            <button type="button" data-acao="menos" data-id="${limpar(item.id)}"
+                                aria-label="Diminuir quantidade de ${limpar(item.nome)}">
+                                <span class="material-symbols-outlined icon-xs" aria-hidden="true">remove</span>
+                            </button>
+                            <span class="qty-num" aria-live="polite">${item.qtd}</span>
+                            <button type="button" data-acao="mais" data-id="${limpar(item.id)}"
+                                aria-label="Aumentar quantidade de ${limpar(item.nome)}">
+                                <span class="material-symbols-outlined icon-xs" aria-hidden="true">add</span>
+                            </button>
+                        </div>
+                        <span class="cart-item-total">${moeda(item.preco * item.qtd)}</span>
+                        <button type="button" class="btn-remove" data-acao="remover" data-id="${limpar(item.id)}"
+                            aria-label="Remover ${limpar(item.nome)}">
+                            <span class="material-symbols-outlined icon-xs" aria-hidden="true">delete</span>
+                            Remover
+                        </button>
+                    </div>
+                </div>
+            `).join("");
+
+            const subtotal = itens.reduce((soma, item) => soma + item.preco * item.qtd, 0);
+            campoSubtotal.textContent = moeda(subtotal);
+            campoTaxa.textContent = TAXA_ENTREGA > 0 ? moeda(TAXA_ENTREGA) : "Grátis";
+            campoTotal.textContent = moeda(subtotal + TAXA_ENTREGA);
+        }
+
+
+        /* ---------- BOTÕES DA LISTA (+, −, remover) ---------- */
+        listaItens.addEventListener("click", (evento) => {
+            const botao = evento.target.closest("button[data-acao]");
+            if (!botao) return;
+
+            let itens = lerCarrinho();
+            const item = itens.find((i) => i.id === botao.dataset.id);
+            if (!item) return;
+
+            if (botao.dataset.acao === "mais") item.qtd++;
+            if (botao.dataset.acao === "menos") item.qtd--;
+            if (botao.dataset.acao === "remover") item.qtd = 0;
+
+            // Quantidade zero: tira o item da lista
+            itens = itens.filter((i) => i.qtd > 0);
+
+            salvarCarrinho(itens);
+            desenhar();
+        });
+
+        document.getElementById("btn-limpar").addEventListener("click", () => {
+            if (confirm("Deseja esvaziar o carrinho?")) {
+                salvarCarrinho([]);
+                desenhar();
+            }
+        });
+
+
+        /* ---------- ENVIAR O PEDIDO ---------- */
+        function mostrarErro(idCampo, mensagem) {
+            document.getElementById("erro-" + idCampo).textContent = mensagem;
+        }
+
+        formPedido.addEventListener("submit", (evento) => {
+            evento.preventDefault();
+
+            const nome = document.getElementById("nome").value.trim();
+            const endereco = document.getElementById("endereco").value.trim();
+            const pagamento = document.getElementById("pagamento").value;
+            const obs = document.getElementById("obs").value.trim();
+
+            // Validação simples
+            mostrarErro("nome", nome ? "" : "Informe seu nome.");
+            mostrarErro("endereco", endereco ? "" : "Informe o endereço de entrega.");
+            mostrarErro("pagamento", pagamento ? "" : "Escolha a forma de pagamento.");
+
+            if (!nome || !endereco || !pagamento) return;
+
+            const itens = lerCarrinho();
+            if (itens.length === 0) return;
+
+            const subtotal = itens.reduce((soma, item) => soma + item.preco * item.qtd, 0);
+
+            // Monta a mensagem do pedido
+            const linhas = [
+                "*Novo pedido - Zé Fominha*",
+                "",
+                ...itens.map((i) => `${i.qtd}x ${i.nome} - ${moeda(i.preco * i.qtd)}`),
+                "",
+                `Subtotal: ${moeda(subtotal)}`,
+                `Entrega: ${moeda(TAXA_ENTREGA)}`,
+                `*Total: ${moeda(subtotal + TAXA_ENTREGA)}*`,
+                "",
+                `Nome: ${nome}`,
+                `Endereço: ${endereco}`,
+                `Pagamento: ${pagamento}`
+            ];
+            if (obs) linhas.push(`Observações: ${obs}`);
+
+            const url = "https://wa.me/" + NUMERO_WHATSAPP + "?text=" + encodeURIComponent(linhas.join("\n"));
+            window.open(url, "_blank", "noopener");
+
+            // Pedido enviado: limpa o carrinho e mostra a confirmação
+            salvarCarrinho([]);
+            atualizarSelo([]);
+            conteudo.classList.add("hidden");
+            estadoEnviado.classList.remove("hidden");
+            formPedido.reset();
+        });
+
+        /* Início */
+        desenhar();
+    </script>
 </body>
+
 </html>
